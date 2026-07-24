@@ -16,23 +16,45 @@ export default function LcFooter() {
     return (
         <footer style={{ background: 'var(--lc-ivory)', color: 'var(--lc-ink)' }}>
             {/* KEEP IN TOUCH */}
-            <div style={{ maxWidth: 1320, margin: '0 auto', padding: 'clamp(72px,9vw,132px) clamp(20px,5vw,72px)' }}>
-                <div className='lc-keep' style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 'clamp(36px,6vw,96px)', alignItems: 'start' }}>
-                    <div>
-                        <div className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.3em' }}>
-                            Newsletter
-                        </div>
-                        <h2 className='lc-display' style={{ fontSize: 'clamp(38px,5vw,64px)', color: 'var(--lc-ink)', margin: '16px 0 0', lineHeight: 1 }}>
-                            Keep in touch
-                        </h2>
-                        <p className='lc-body' style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--lc-ink-soft)', margin: '20px 0 0', maxWidth: 340 }}>
-                            Sign up for seasonal menus, patio openings and events on the marina. No spam — just the good
-                            stuff.
-                        </p>
+            <div className='lc-keep'>
+                <div className='lc-keep-media lc-media lc-frame'>
+                    <Image
+                        src='/images/Lakeclub%20(10).jpg'
+                        alt='Guests at The Lake Club'
+                        fill
+                        sizes='(max-width: 900px) 100vw, 40vw'
+                        style={{ objectFit: 'cover' }}
+                    />
+                </div>
+                <div className='lc-keep-body'>
+                    <div className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.3em' }}>
+                        Newsletter
                     </div>
+                    <h2 className='lc-display' style={{ fontSize: 'clamp(34px,4.4vw,56px)', color: 'var(--lc-ink)', margin: '16px 0 0', lineHeight: 1 }}>
+                        Keep in touch
+                    </h2>
+                    <p className='lc-body' style={{ fontSize: 15, lineHeight: 1.7, color: 'var(--lc-ink-soft)', margin: '18px 0 32px', maxWidth: 420 }}>
+                        Sign up for seasonal menus, patio openings and events on the marina. No spam — just the good
+                        stuff.
+                    </p>
                     <NewsletterForm />
                 </div>
             </div>
+
+            <style>{`
+                .lc-keep {
+                    max-width: 1320px; margin: 0 auto;
+                    padding: clamp(56px,7vw,104px) clamp(20px,5vw,72px);
+                    display: grid; grid-template-columns: 0.82fr 1.18fr;
+                    gap: clamp(32px,5vw,80px); align-items: stretch;
+                }
+                .lc-keep-media { position: relative; min-height: clamp(320px, 34vw, 480px); }
+                .lc-keep-body { display: flex; flex-direction: column; justify-content: center; }
+                @media (max-width: 900px){
+                    .lc-keep { grid-template-columns: 1fr; }
+                    .lc-keep-media { min-height: 0; aspect-ratio: 16 / 10; }
+                }
+            `}</style>
 
             {/* INFO STRIP */}
             <div style={{ borderTop: '1px solid var(--lc-line)', borderBottom: '1px solid var(--lc-line)' }}>

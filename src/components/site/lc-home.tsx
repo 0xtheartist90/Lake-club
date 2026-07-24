@@ -4,15 +4,19 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 import ExperienceShowcase from './experience-showcase';
+import FindYourVisit from './find-your-visit';
+import GalleryMarquee from './gallery-marquee';
+import HeroVideo from './hero-video';
 import MenuExplorer from './menu-explorer';
-import { RESERVE_URL } from './nav-links';
+import { PHONE, PHONE_HREF, RESERVE_URL } from './nav-links';
+import Parallax from './parallax';
+import PrivateDining from './private-dining';
 import ReservationBar from './reservation-bar';
 import Reveal from './reveal';
 import Testimonials from './testimonials';
+import WorthTheDrive from './worth-the-drive';
 
 const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
-
-const MARQUEE = [2, 3, 4, 6, 7, 8, 12, 15, 18, 19];
 
 export default function LcHome() {
     return (
@@ -36,6 +40,7 @@ export default function LcHome() {
                     sizes='100vw'
                     style={{ objectFit: 'cover', objectPosition: 'center 38%' }}
                 />
+                <HeroVideo sources={['/videos/lakeclub-hero-horizontal-v1.mp4']} />
                 <div
                     style={{
                         position: 'absolute',
@@ -84,46 +89,77 @@ export default function LcHome() {
                     <Reveal delay={240} style={{ marginTop: 26 }}>
                         <ReservationBar variant='dark' />
                     </Reveal>
+                    <Reveal delay={300} className='lc-mono lc-hero-links'>
+                        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                            <span
+                                aria-hidden='true'
+                                style={{
+                                    width: 15,
+                                    height: 15,
+                                    borderRadius: '50%',
+                                    background: '#DA3743',
+                                    display: 'grid',
+                                    placeItems: 'center',
+                                    flex: '0 0 auto'
+                                }}>
+                                <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#fff' }} />
+                            </span>
+                            <span
+                                style={{
+                                    color: 'rgba(255,255,255,.85)',
+                                    fontFamily: 'var(--font-body)',
+                                    fontWeight: 600,
+                                    fontSize: 11.5,
+                                    letterSpacing: '0.01em',
+                                    textTransform: 'none'
+                                }}>
+                                Powered by <span style={{ fontWeight: 700 }}>OpenTable</span>
+                            </span>
+                        </span>
+                        <span aria-hidden='true' style={{ opacity: 0.35 }}>·</span>
+                        <Link href='/menus' className='lc-hero-link'>View menus</Link>
+                        <span aria-hidden='true' style={{ opacity: 0.35 }}>·</span>
+                        <a href={PHONE_HREF} className='lc-hero-link'>Call {PHONE}</a>
+                    </Reveal>
+                </div>
+                <div className='lc-scroll-hint lc-mono' aria-hidden='true'>
+                    Scroll <span className='lc-scroll-arrow'>↓</span>
                 </div>
             </section>
 
-            {/* ===================== INTRO STATEMENT ===================== */}
-            <section style={{ background: 'var(--lc-cream)', padding: 'clamp(88px,12vw,180px) clamp(20px,5vw,72px)' }}>
-                <div style={{ maxWidth: 900, margin: '0 auto', textAlign: 'center' }}>
-                    <Reveal
-                        className='lc-media lc-zoom lc-frame'
-                        style={{
-                            position: 'relative',
-                            width: 'min(440px, 82vw)',
-                            aspectRatio: '4 / 3',
-                            margin: '0 auto clamp(36px,5vw,60px)'
-                        }}>
-                        <Image
-                            src='/exterior-lake-club-sign-wood-facade-ss6499.jpg'
-                            alt='The Lake Club entrance at Friday Harbour'
-                            fill
-                            sizes='(max-width: 640px) 82vw, 440px'
-                            style={{ objectFit: 'cover' }}
-                        />
-                    </Reveal>
+            {/* ===================== INTRO — image full-height left, statement right ===================== */}
+            <section className='lc-intro'>
+                <Reveal className='lc-media lc-zoom lc-intro-media'>
+                    <Image
+                        src='/images/interior-dining-wide.jpg'
+                        alt='Inside The Lake Club — timber ceiling, long bar, and marina-facing windows'
+                        fill
+                        sizes='(max-width: 900px) 100vw, 48vw'
+                        style={{ objectFit: 'cover', objectPosition: '38% center' }}
+                    />
+                </Reveal>
+                <div className='lc-intro-body'>
                     <Reveal className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.32em', fontSize: 10 }}>
                         On the water at Friday Harbour
                     </Reveal>
-                    <Reveal delay={100}>
-                        <p className='lc-display' style={{ fontSize: 'clamp(26px, 3.4vw, 46px)', lineHeight: 1.32, color: 'var(--lc-ink)', margin: '30px 0 0' }}>
+                    <Reveal delay={90}>
+                        <p className='lc-display lc-intro-tx'>
                             Set on the marina in Innisfil, The Lake Club serves unfussy, seasonal food and a genuine
                             welcome — from a long lunch on the patio to{' '}
-                            <span className='lc-italic' style={{ color: 'var(--lc-accent)' }}>golden-hour cocktails</span> as
-                            the boats come in.
+                            <span className='lc-italic' style={{ color: 'var(--lc-accent)' }}>golden-hour cocktails</span>{' '}
+                            as the boats come in.
                         </p>
                     </Reveal>
-                    <Reveal delay={180} style={{ marginTop: 44 }}>
-                        <Link href='/about' className='lc-btn lc-btn--ghost'>
+                    <Reveal delay={160}>
+                        <Link href='/about' className='lc-btn lc-btn--ghost' style={{ height: 46, padding: '0 26px' }}>
                             Our story <ArrowRight size={14} strokeWidth={1.6} />
                         </Link>
                     </Reveal>
                 </div>
             </section>
+
+            {/* ===================== FIND YOUR VISIT ===================== */}
+            <FindYourVisit />
 
             {/* ===================== EXPERIENCE ===================== */}
             <ExperienceShowcase />
@@ -153,24 +189,24 @@ export default function LcHome() {
                     </div>
                 </div>
 
-                <div className='lc-marquee' aria-label='Photos from The Lake Club'>
-                    <div className='lc-marquee-track'>
-                        {[...MARQUEE, ...MARQUEE].map((n, i) => (
-                            <div key={`${n}-${i}`} className='lc-mq-item lc-media' aria-hidden={i >= MARQUEE.length}>
-                                <Image src={photo(n)} alt='' fill sizes='(max-width: 700px) 60vw, 26vw' style={{ objectFit: 'cover' }} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <GalleryMarquee />
             </section>
 
-            {/* ===================== TESTIMONIALS ===================== */}
+            {/* ===================== REVIEWS ===================== */}
             <Testimonials />
+
+            {/* ===================== PRIVATE DINING + INQUIRY ===================== */}
+            <PrivateDining />
+
+            {/* ===================== WORTH THE DRIVE — CTA band ===================== */}
+            <WorthTheDrive />
 
             {/* ===================== FULL-BLEED CLOSING BAND ===================== */}
             <section style={{ position: 'relative', minHeight: 'min(88vh, 840px)', display: 'flex', alignItems: 'center', overflow: 'hidden', color: '#fff' }}>
-                <Image src={photo(10)} alt='Guests at The Lake Club' fill sizes='100vw' style={{ objectFit: 'cover', objectPosition: 'center 35%' }} />
-                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(15,24,34,.86) 0%, rgba(15,24,34,.5) 46%, rgba(15,24,34,.14) 100%)' }} />
+                <Parallax strength={80}>
+                    <Image src={photo(18)} alt='A spread of dishes at The Lake Club' fill sizes='100vw' style={{ objectFit: 'cover', objectPosition: 'center' }} />
+                </Parallax>
+                <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(90deg, rgba(15,24,34,.9) 0%, rgba(15,24,34,.58) 44%, rgba(15,24,34,.14) 100%)' }} />
                 <div style={{ position: 'relative', zIndex: 1, padding: '0 clamp(20px,6vw,96px)', maxWidth: 860 }}>
                     <Reveal className='lc-mono' style={{ color: 'var(--lc-accent-on-dark)', letterSpacing: '0.32em', fontSize: 10 }}>
                         Why we&rsquo;re here
@@ -193,16 +229,34 @@ export default function LcHome() {
             </section>
 
             <style>{`
-                /* Marquee — continuous auto-loop */
-                .lc-marquee { overflow: hidden; width: 100%; }
-                .lc-marquee-track { display: flex; width: max-content; animation: lc-mq 64s linear infinite; }
-                .lc-marquee:hover .lc-marquee-track { animation-play-state: paused; }
-                .lc-mq-item { position: relative; flex: 0 0 clamp(240px, 26vw, 400px); aspect-ratio: 3 / 4; margin-right: 3px; }
-                @keyframes lc-mq { to { transform: translateX(-50%); } }
-                @media (prefers-reduced-motion: reduce){
-                    .lc-marquee-track { animation: none; }
-                    .lc-marquee { overflow-x: auto; }
+                /* Intro — full-height image left, compact statement right */
+                .lc-intro { display: grid; grid-template-columns: 0.95fr 1.05fr; background: var(--lc-cream); align-items: stretch; }
+                .lc-intro-media { position: relative; min-height: clamp(340px, 42vw, 560px); }
+                .lc-intro-body {
+                    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+                    gap: clamp(20px, 2.4vw, 30px);
+                    padding: clamp(48px,5.5vw,88px) clamp(24px,5vw,96px) clamp(48px,5.5vw,88px) clamp(24px,4vw,72px);
                 }
+                .lc-intro-tx { font-size: clamp(21px, 2.3vw, 34px); line-height: 1.38; color: var(--lc-ink); margin: 0; max-width: 560px; }
+                @media (max-width: 900px){
+                    .lc-intro { grid-template-columns: 1fr; }
+                    .lc-intro-media { min-height: 0; aspect-ratio: 16 / 10; }
+                }
+
+                /* Hero extras */
+                .lc-hero-links { margin-top: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 10px 16px; font-size: 9px; letter-spacing: 0.2em; }
+                .lc-hero-link { color: rgba(255,255,255,.85); text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.3); padding-bottom: 3px; transition: border-color .3s var(--lc-ease); }
+                .lc-hero-link:hover { border-color: #fff; }
+                .lc-scroll-hint {
+                    position: absolute; bottom: 20px; right: clamp(20px,4vw,64px); z-index: 3;
+                    color: rgba(255,255,255,.65); font-size: 9px; letter-spacing: 0.3em;
+                    display: inline-flex; align-items: center; gap: 8px;
+                }
+                .lc-scroll-arrow { display: inline-block; animation: lc-bob 1.7s ease-in-out infinite; }
+                @keyframes lc-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+                @media (max-width: 900px){ .lc-scroll-hint { display: none; } }
+                @media (prefers-reduced-motion: reduce){ .lc-scroll-arrow { animation: none; } }
+
             `}</style>
         </main>
     );

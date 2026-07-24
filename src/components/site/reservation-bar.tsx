@@ -110,7 +110,11 @@ export default function ReservationBar({ variant = 'light' }: { variant?: 'light
                     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23425969' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
                     background-repeat: no-repeat; background-position: right center; padding-right: 18px;
                 }
-                .lc-resv--dark .lc-resv select { color: #fff; }
+                .lc-resv--dark select {
+                    color: #fff !important;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+                }
+                .lc-resv--dark select option { color: var(--lc-ink); background: #fff; }
                 .lc-resv-div { width: 1px; background: var(--lc-line); align-self: stretch; }
                 .lc-resv--dark .lc-resv-div { background: rgba(255,255,255,.16); }
                 .lc-resv-btn {

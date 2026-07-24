@@ -5,6 +5,7 @@ import { Fraunces, Inter } from 'next/font/google';
 
 import LcFooter from '@/components/site/lc-footer';
 import LcNav from '@/components/site/lc-nav';
+import SmoothScroll from '@/components/site/smooth-scroll';
 
 import '@/app/globals.css';
 
@@ -38,6 +39,7 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
                 <a href='#main' className='lc-skip-link'>
                     Skip to content
                 </a>
+                <SmoothScroll />
                 <LcNav />
                 {children}
                 <LcFooter />

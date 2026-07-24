@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 
+import Parallax from './parallax';
 import Reveal from './reveal';
 
 const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
@@ -26,21 +27,23 @@ export default function ExperienceShowcase() {
         <section className='lc-exp'>
             {/* Main image — bleeds to the right edge, crossfades on thumbnail select */}
             <div className='lc-exp-media'>
-                {SHOTS.map((s, i) => (
-                    <Image
-                        key={s.n}
-                        src={photo(s.n)}
-                        alt={i === active ? s.alt : ''}
-                        aria-hidden={i !== active}
-                        fill
-                        sizes='(max-width: 900px) 100vw, 55vw'
-                        style={{
-                            objectFit: 'cover',
-                            opacity: i === active ? 1 : 0,
-                            transition: 'opacity 1.1s var(--lc-ease)'
-                        }}
-                    />
-                ))}
+                <Parallax strength={60} scale={1.16}>
+                    {SHOTS.map((s, i) => (
+                        <Image
+                            key={s.n}
+                            src={photo(s.n)}
+                            alt={i === active ? s.alt : ''}
+                            aria-hidden={i !== active}
+                            fill
+                            sizes='(max-width: 900px) 100vw, 55vw'
+                            style={{
+                                objectFit: 'cover',
+                                opacity: i === active ? 1 : 0,
+                                transition: 'opacity 1.1s var(--lc-ease)'
+                            }}
+                        />
+                    ))}
+                </Parallax>
                 <div className='lc-exp-scrim' aria-hidden='true' />
             </div>
 
@@ -100,7 +103,7 @@ export default function ExperienceShowcase() {
                     overflow: hidden;
                     display: flex;
                 }
-                .lc-exp-media { position: absolute; top: 0; right: 0; width: 58%; height: 100%; }
+                .lc-exp-media { position: absolute; top: 0; right: 0; width: 58%; height: 100%; overflow: hidden; }
                 .lc-exp-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, var(--lc-dark-2) 0%, rgba(14,24,34,.4) 34%, transparent 62%); }
                 .lc-exp-content {
                     position: relative; z-index: 2;

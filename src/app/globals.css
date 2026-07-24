@@ -444,13 +444,13 @@ body {
   transform: scale(1.06);
 }
 
-/* Section reveal (progressive enhancement; visible by default) */
+/* Section reveal — relaxed, unhurried (progressive enhancement) */
 .lc-reveal {
   opacity: 0;
-  transform: translateY(26px);
+  transform: translateY(38px);
   transition:
-    opacity 0.8s var(--lc-ease),
-    transform 0.8s var(--lc-ease);
+    opacity 1.3s var(--lc-ease),
+    transform 1.3s var(--lc-ease);
 }
 .lc-reveal.is-in {
   opacity: 1;

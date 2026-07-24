@@ -263,9 +263,10 @@ export default function MenuExplorer() {
                 .lc-menux-tab.is-active .lc-menux-tab-label { color: var(--lc-ink); }
                 .lc-menux-tab.is-active { border-bottom-color: var(--lc-accent); }
 
-                /* Panel */
-                .lc-menux-list { list-style: none; padding: 0; margin: 0; animation: lc-menux-fade .5s var(--lc-ease); border-top: 1px solid var(--lc-line); }
-                @keyframes lc-menux-fade { from { opacity: 0; transform: translateY(10px); } }
+                /* Panel — fixed min-height so switching tabs never shifts the layout */
+                .lc-menux-panel { min-height: 500px; }
+                .lc-menux-list { list-style: none; padding: 0; margin: 0; animation: lc-menux-fade .45s var(--lc-ease); border-top: 1px solid var(--lc-line); }
+                @keyframes lc-menux-fade { from { opacity: 0; } }
                 .lc-menux-item { padding: clamp(11px,1.5vh,15px) 0; border-bottom: 1px solid var(--lc-line); }
                 .lc-menux-row { display: flex; align-items: baseline; gap: 12px; }
                 .lc-menux-name { font-size: clamp(17px,1.6vw,20px); color: var(--lc-ink); line-height: 1.15; }
