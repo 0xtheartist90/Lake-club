@@ -8,6 +8,8 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 
 import { DISH_ICONS, type DishIconName } from './dish-icons';
+import { RESERVE_URL } from './nav-links';
+import Parallax from './parallax';
 import Reveal from './reveal';
 
 const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
@@ -76,7 +78,7 @@ const CATEGORIES: Category[] = [
     },
     {
         key: 'dessert',
-        img: 11,
+        img: 27,
         label: 'Dessert',
         icon: 'cake',
         meta: 'Served all day',
@@ -91,7 +93,7 @@ const CATEGORIES: Category[] = [
     },
     {
         key: 'beverage',
-        img: 1,
+        img: 28,
         label: 'Beverage & Wine',
         icon: 'coupe',
         meta: 'Open to close',
@@ -107,7 +109,7 @@ const CATEGORIES: Category[] = [
     },
     {
         key: 'seasonal',
-        img: 13,
+        img: 34,
         label: 'Seasonal',
         icon: 'sprig',
         meta: 'Summer 2026',
@@ -125,179 +127,186 @@ const CATEGORIES: Category[] = [
 export default function MenuExplorer() {
     const [active, setActive] = useState(1); // Dinner first
     const cat = CATEGORIES[active];
+    const Icon = DISH_ICONS[cat.icon];
 
     return (
-        <section className='lc-menux' aria-label='Menus'>
-            <div className='lc-menux-in'>
-                <div className='lc-menux-head'>
-                    <div>
-                        <Reveal className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.32em', fontSize: 10 }}>
-                            The menus
-                        </Reveal>
-                        <Reveal delay={60}>
-                            <h2 className='lc-display' style={{ fontSize: 'clamp(30px,3.6vw,48px)', color: 'var(--lc-ink)', margin: '14px 0 0', lineHeight: 1.02 }}>
-                                Six menus, <span className='lc-italic' style={{ color: 'var(--lc-accent)' }}>one kitchen.</span>
-                            </h2>
-                        </Reveal>
-                    </div>
-                    <Reveal delay={120}>
-                        <Link href='/menus' className='lc-btn lc-btn--ghost lc-menux-all'>
-                            Full menu <ArrowRight size={14} strokeWidth={1.6} />
+        <section className='lc-sig' aria-label='Menus' id='menus'>
+            <div className='lc-sig-grid'>
+                {/* LEFT — accent menu panel */}
+                <div className='lc-sig-panel'>
+                    <Reveal className='lc-sig-panel-head'>
+                        <div>
+                            <span className='lc-mono' style={{ color: 'var(--lc-accent-on-dark)', letterSpacing: '0.26em', fontSize: 9.5 }}>
+                                {cat.meta}
+                            </span>
+                            <h3 className='lc-display lc-sig-cat'>{cat.label}</h3>
+                        </div>
+                        <span className='lc-sig-icon' aria-hidden='true'>
+                            <Icon />
+                        </span>
+                    </Reveal>
+
+                    <Reveal delay={90}>
+                        <nav className='lc-sig-tabs' role='tablist' aria-label='Menu categories'>
+                            {CATEGORIES.map((c, i) => (
+                                <button
+                                    key={c.key}
+                                    role='tab'
+                                    aria-selected={i === active}
+                                    onClick={() => setActive(i)}
+                                    className={`lc-sig-tab ${i === active ? 'is-active' : ''}`}>
+                                    {c.label}
+                                </button>
+                            ))}
+                        </nav>
+                    </Reveal>
+
+                    <ul key={cat.key} className='lc-sig-list'>
+                        {cat.items.map((d, i) => (
+                            <Reveal as='li' key={d.name} variant='fade' delay={i * 70} className='lc-sig-item'>
+                                <div className='lc-sig-item-row'>
+                                    <span className='lc-display lc-sig-name'>
+                                        {d.name}
+                                        {d.tag && <sup className='lc-sig-tag'>{d.tag}</sup>}
+                                    </span>
+                                    <span className='lc-sig-leader' aria-hidden='true' />
+                                    <span className='lc-sig-price'>{d.price}</span>
+                                </div>
+                                {d.desc && <p className='lc-body lc-sig-desc'>{d.desc}</p>}
+                            </Reveal>
+                        ))}
+                    </ul>
+
+                    <Reveal delay={180}>
+                        <Link href={cat.href} className='lc-btn lc-btn--ghost-light lc-sig-full'>
+                            View full menu <ArrowRight size={14} strokeWidth={1.6} />
                         </Link>
                     </Reveal>
                 </div>
 
-                <Reveal delay={140} className='lc-menux-grid'>
-                    {/* Category tabs */}
-                    <nav className='lc-menux-tabs' role='tablist' aria-label='Menu categories'>
-                        {CATEGORIES.map((c, i) => {
-                            const Icon = DISH_ICONS[c.icon];
-                            const is = i === active;
+                {/* RIGHT TOP — intro */}
+                <div className='lc-sig-intro'>
+                    <Reveal className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.32em', fontSize: 10 }}>
+                        The menu
+                    </Reveal>
+                    <Reveal delay={70}>
+                        <h2 className='lc-display lc-sig-title'>
+                            Signature dishes.
+                            <br />
+                            <span className='lc-italic' style={{ color: 'var(--lc-accent)' }}>From the pass.</span>
+                        </h2>
+                    </Reveal>
+                    <Reveal delay={130}>
+                        <p className='lc-body lc-sig-copy'>
+                            One marina-facing kitchen, six menus. Seasonal Canadian plates with global influence —
+                            share plates and dry-aged steaks to weekend brunch and a cellar built for long tables.
+                        </p>
+                    </Reveal>
+                    <Reveal delay={180}>
+                        <a href={RESERVE_URL} target='_blank' rel='noopener noreferrer' className='lc-btn lc-btn--dark lc-sig-reserve'>
+                            Reserve a table <ArrowRight size={14} strokeWidth={1.6} />
+                        </a>
+                    </Reveal>
+                </div>
 
-                            return (
-                                <button
-                                    key={c.key}
-                                    role='tab'
-                                    aria-selected={is}
-                                    id={`lc-tab-${c.key}`}
-                                    aria-controls='lc-menux-panel'
-                                    onClick={() => setActive(i)}
-                                    className={`lc-menux-tab ${is ? 'is-active' : ''}`}>
-                                    <span className='lc-menux-tab-ic'>
-                                        <Icon />
-                                    </span>
-                                    <span className='lc-menux-tab-tx'>
-                                        <span className='lc-display lc-menux-tab-label'>{c.label}</span>
-                                        <span className='lc-menux-tab-meta'>{c.meta}</span>
-                                    </span>
-                                </button>
-                            );
-                        })}
-                    </nav>
-
-                    {/* Items panel */}
-                    <div id='lc-menux-panel' role='tabpanel' aria-labelledby={`lc-tab-${cat.key}`} className='lc-menux-panel'>
-                        <ul key={cat.key} className='lc-menux-list'>
-                            {cat.items.map((d) => (
-                                <li key={d.name} className='lc-menux-item'>
-                                    <div className='lc-menux-row'>
-                                        <span className='lc-display lc-menux-name'>
-                                            {d.name}
-                                            {d.tag && <sup className='lc-menux-tag'>{d.tag}</sup>}
-                                        </span>
-                                        <span className='lc-menux-leader' aria-hidden='true' />
-                                        <span className='lc-menux-price'>{d.price}</span>
-                                    </div>
-                                    {d.desc && <p className='lc-body lc-menux-desc'>{d.desc}</p>}
-                                </li>
-                            ))}
-                        </ul>
-                        <Link href={cat.href} className='lc-mono lc-menux-more'>
-                            View the full {cat.label.toLowerCase()} menu <ArrowRight size={12} strokeWidth={1.7} />
-                        </Link>
-                    </div>
-
-                    {/* Category photo — crossfades with the active tab */}
-                    <div className='lc-menux-photo lc-media lc-frame' aria-hidden='true'>
+                {/* RIGHT BOTTOM — image (crossfades with category) */}
+                <Reveal variant='image' className='lc-sig-media lc-media'>
+                    <Parallax strength={44} scale={1.16}>
                         {CATEGORIES.map((c, i) => (
                             <Image
                                 key={c.key}
                                 src={photo(c.img)}
                                 alt=''
+                                aria-hidden='true'
                                 fill
-                                sizes='(max-width: 1100px) 100vw, 30vw'
-                                style={{
-                                    objectFit: 'cover',
-                                    opacity: i === active ? 1 : 0,
-                                    transition: 'opacity 1s var(--lc-ease)'
-                                }}
+                                sizes='(max-width: 900px) 100vw, 50vw'
+                                style={{ objectFit: 'cover', opacity: i === active ? 1 : 0, transition: 'opacity 1s var(--lc-ease)' }}
                             />
                         ))}
-                        <div className='lc-menux-photo-scrim' />
-                        <div className='lc-menux-photo-cap'>
-                            <span className='lc-mono' style={{ color: 'var(--lc-accent-on-dark)', letterSpacing: '0.24em', fontSize: 9.5 }}>
-                                {cat.meta}
-                            </span>
-                            <span className='lc-display' style={{ fontSize: 22, color: '#fff', marginTop: 4 }}>{cat.label}</span>
-                        </div>
-                    </div>
+                    </Parallax>
                 </Reveal>
             </div>
 
             <style>{`
-                .lc-menux { background: var(--lc-ivory); border-top: 1px solid var(--lc-line); }
-                .lc-menux-in {
-                    max-width: 1360px; margin: 0 auto;
-                    padding: clamp(40px,5vh,64px) clamp(20px,3vw,48px);
+                .lc-sig { background: var(--lc-cream); }
+                .lc-sig-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-rows: auto 1fr;
+                    grid-template-areas: "panel intro" "panel media";
+                    min-height: min(92vh, 940px);
+                }
+
+                /* LEFT panel */
+                .lc-sig-panel {
+                    grid-area: panel; position: relative; overflow: hidden;
+                    background: var(--lc-accent); color: #fff;
+                    padding: clamp(32px,3.4vw,56px);
                     display: flex; flex-direction: column;
                 }
-                @media (min-width: 901px){
-                    /* fits in a single viewport */
-                    .lc-menux-in { min-height: 0; max-height: none; }
-                    .lc-menux { display: flex; align-items: center; min-height: 92vh; }
-                    .lc-menux-in { width: 100%; }
+                /* palm-leaf pattern faintly blended into the slate panel */
+                .lc-sig-panel::before {
+                    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+                    background-image: url(/backgroundpattern2.jpg);
+                    background-repeat: repeat;
+                    background-size: clamp(300px, 26vw, 420px) auto;
+                    mix-blend-mode: soft-light;
+                    opacity: 0.05;
                 }
-                .lc-menux-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: clamp(24px,3.4vh,40px); }
-                .lc-menux-all { height: 44px; padding: 0 24px; }
+                .lc-sig-panel > * { position: relative; z-index: 1; }
+                .lc-sig-panel-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+                .lc-sig-cat { font-size: clamp(30px,3.4vw,46px); color: #fff; margin: 8px 0 0; line-height: 1; }
+                .lc-sig-icon { color: rgba(255,255,255,.85); display: inline-flex; margin-top: 6px; }
+                .lc-sig-icon svg { width: 26px; height: 26px; }
 
-                .lc-menux-grid { display: grid; grid-template-columns: 280px 1fr minmax(260px, 340px); gap: clamp(28px,3.4vw,60px); align-items: stretch; }
-                .lc-menux-photo { position: relative; min-height: 460px; align-self: stretch; }
-                .lc-menux-photo-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 58%, rgba(15,24,34,.72)); }
-                .lc-menux-photo-cap { position: absolute; left: 24px; bottom: 22px; z-index: 3; display: flex; flex-direction: column; }
-
-                /* Tabs */
-                .lc-menux-tabs { display: flex; flex-direction: column; border-top: 1px solid var(--lc-line); }
-                .lc-menux-tab {
-                    display: flex; align-items: center; gap: 16px;
-                    padding: 15px 4px; border: none; border-bottom: 1px solid var(--lc-line);
-                    background: transparent; cursor: pointer; text-align: left;
-                    transition: padding-left .35s var(--lc-ease), background .35s var(--lc-ease);
+                .lc-sig-tabs { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 22px 0 8px; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,.2); }
+                .lc-sig-tab {
+                    background: none; border: none; cursor: pointer; padding: 0 0 3px;
+                    font-family: var(--font-body); font-size: 10px; font-weight: 600;
+                    letter-spacing: 0.18em; text-transform: uppercase;
+                    color: rgba(255,255,255,.6); border-bottom: 1px solid transparent;
+                    transition: color .3s var(--lc-ease), border-color .3s var(--lc-ease);
                 }
-                .lc-menux-tab:hover { padding-left: 10px; }
-                .lc-menux-tab-ic { color: var(--lc-ink-faint); display: inline-flex; transition: color .3s var(--lc-ease); flex: 0 0 auto; }
-                .lc-menux-tab-tx { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-                .lc-menux-tab-label { font-size: 19px; color: var(--lc-ink-soft); line-height: 1.1; transition: color .3s var(--lc-ease); }
-                .lc-menux-tab-meta { font-family: var(--font-body); font-size: 9.5px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--lc-ink-faint); }
-                .lc-menux-tab.is-active { padding-left: 10px; }
-                .lc-menux-tab.is-active .lc-menux-tab-ic { color: var(--lc-accent); }
-                .lc-menux-tab.is-active .lc-menux-tab-label { color: var(--lc-ink); }
-                .lc-menux-tab.is-active { border-bottom-color: var(--lc-accent); }
+                .lc-sig-tab:hover { color: rgba(255,255,255,.9); }
+                .lc-sig-tab.is-active { color: #fff; border-bottom-color: #fff; }
 
-                /* Panel — fixed min-height so switching tabs never shifts the layout */
-                .lc-menux-panel { min-height: 500px; }
-                .lc-menux-list { list-style: none; padding: 0; margin: 0; animation: lc-menux-fade .45s var(--lc-ease); border-top: 1px solid var(--lc-line); }
-                @keyframes lc-menux-fade { from { opacity: 0; } }
-                .lc-menux-item { padding: clamp(11px,1.5vh,15px) 0; border-bottom: 1px solid var(--lc-line); }
-                .lc-menux-row { display: flex; align-items: baseline; gap: 12px; }
-                .lc-menux-name { font-size: clamp(17px,1.6vw,20px); color: var(--lc-ink); line-height: 1.15; }
-                .lc-menux-tag { font-family: var(--font-body); font-size: 8.5px; font-weight: 500; color: var(--lc-accent); margin-left: 7px; letter-spacing: 0.1em; }
-                .lc-menux-leader { flex: 1; border-bottom: 1px dotted var(--lc-ink-faint); transform: translateY(-4px); }
-                .lc-menux-price { font-family: var(--font-display); font-size: 15.5px; color: var(--lc-ink); }
-                .lc-menux-price::before { content: '$'; font-size: 11px; color: var(--lc-ink-soft); margin-right: 1px; }
-                .lc-menux-desc { font-size: 12.5px; line-height: 1.5; color: var(--lc-ink-soft); margin: 4px 0 0; max-width: 88%; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
-                .lc-menux-more {
-                    display: inline-flex; align-items: center; gap: 8px;
-                    margin-top: 18px; color: var(--lc-accent); text-decoration: none;
-                    font-size: 10px; letter-spacing: 0.22em;
-                }
-                .lc-menux-more:hover { color: var(--lc-ink); }
+                .lc-sig-list { list-style: none; padding: 0; margin: 0; flex: 1; }
+                .lc-sig-item { padding: clamp(11px,1.3vw,15px) 0; border-bottom: 1px solid rgba(255,255,255,.16); }
+                .lc-sig-item:last-child { border-bottom: none; }
+                .lc-sig-item-row { display: flex; align-items: baseline; gap: 12px; }
+                .lc-sig-name { font-size: clamp(16px,1.5vw,19px); color: #fff; line-height: 1.15; }
+                .lc-sig-tag { font-family: var(--font-body); font-size: 8px; font-weight: 500; color: rgba(255,255,255,.75); margin-left: 6px; letter-spacing: 0.08em; }
+                .lc-sig-leader { flex: 1; border-bottom: 1px dotted rgba(255,255,255,.32); transform: translateY(-4px); }
+                .lc-sig-price { font-family: var(--font-display); font-size: 15px; color: #fff; }
+                .lc-sig-price::before { content: '$'; font-size: 11px; color: rgba(255,255,255,.7); margin-right: 1px; }
+                .lc-sig-desc { font-size: 12px; line-height: 1.5; color: rgba(255,255,255,.7); margin: 4px 0 0; max-width: 92%;
+                    overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; }
+                .lc-sig-full { width: 100%; margin-top: clamp(20px,2.4vw,32px); }
 
-                @media (max-width: 1100px) and (min-width: 901px){
-                    .lc-menux-grid { grid-template-columns: 260px 1fr; }
-                    .lc-menux-photo { display: none; }
+                /* RIGHT intro */
+                .lc-sig-intro {
+                    grid-area: intro; background: var(--lc-cream);
+                    padding: clamp(40px,4.4vw,72px) clamp(28px,4vw,72px);
+                    display: flex; flex-direction: column; justify-content: center;
                 }
+                .lc-sig-title { font-size: clamp(30px,3.6vw,52px); color: var(--lc-ink); margin: 16px 0 0; line-height: 1.04; }
+                .lc-sig-copy { font-size: 15px; line-height: 1.7; color: var(--lc-ink-soft); margin: 20px 0 30px; max-width: 460px; }
+                .lc-sig-reserve { align-self: flex-start; }
+
+                /* RIGHT media */
+                .lc-sig-media { grid-area: media; position: relative; min-height: 320px; background: var(--lc-sand); }
+
                 @media (max-width: 900px){
-                    .lc-menux-grid { grid-template-columns: 1fr; gap: 24px; }
-                    .lc-menux-photo { order: 2; min-height: 0; height: clamp(160px, 42vw, 240px); }
-                    .lc-menux-panel { order: 3; }
-                    .lc-menux-tabs { order: 1; flex-direction: row; overflow-x: auto; border-top: none; border-bottom: 1px solid var(--lc-line); scrollbar-width: none; }
-                    .lc-menux-tabs::-webkit-scrollbar { display: none; }
-                    .lc-menux-tab { flex: 0 0 auto; flex-direction: column; align-items: center; gap: 8px; padding: 12px 14px !important; border-bottom: 2px solid transparent; }
-                    .lc-menux-tab.is-active { border-bottom-color: var(--lc-accent); }
-                    .lc-menux-tab-tx { align-items: center; }
-                    .lc-menux-tab-label { font-size: 15px; }
-                    .lc-menux-tab-meta { display: none; }
-                    .lc-menux-desc { max-width: 100%; }
+                    .lc-sig-grid {
+                        grid-template-columns: 1fr;
+                        grid-template-rows: auto auto auto;
+                        grid-template-areas: "intro" "panel" "media";
+                        min-height: 0;
+                    }
+                    .lc-sig-media { aspect-ratio: 16 / 10; min-height: 0; }
+                    .lc-sig-tabs { overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+                    .lc-sig-tabs::-webkit-scrollbar { display: none; }
+                    .lc-sig-tab { flex: 0 0 auto; }
                 }
             `}</style>
         </section>

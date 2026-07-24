@@ -6,8 +6,8 @@ import Image from 'next/image';
 
 const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
 
-/* Aerials (12, 15, 19) spread apart so no two run back-to-back, including the loop seam. */
-const MARQUEE = [2, 3, 12, 6, 7, 15, 4, 20, 8, 19];
+/* Aerials (4, 12, 15, 19) spread apart so no two run back-to-back, including the loop seam. */
+const MARQUEE = [2, 6, 12, 7, 15, 25, 20, 19, 29, 4];
 
 export default function GalleryMarquee() {
     const [open, setOpen] = useState<number | null>(null);

@@ -71,10 +71,11 @@ export default function LcNav() {
                     />
                     <span
                         style={{
-                            fontFamily: 'var(--font-display)',
-                            fontWeight: 450,
+                            fontFamily: 'var(--font-body)',
+                            fontWeight: 600,
                             fontSize: 14,
-                            letterSpacing: '0.32em',
+                            letterSpacing: '0.24em',
+                            textTransform: 'uppercase',
                             color: c,
                             whiteSpace: 'nowrap',
                             transition: 'color .4s var(--lc-ease)'

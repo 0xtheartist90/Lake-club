@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Facebook, Instagram } from 'lucide-react';
+import { CalendarCheck, Clock, Facebook, Instagram, MapPin } from 'lucide-react';
 
 import { NAV_LINKS, PHONE, PHONE_HREF } from './nav-links';
 import NewsletterForm from './newsletter-form';
+import Reveal from './reveal';
 
 const INFO = [
-    { label: 'Hours', lines: ['Mon–Fri · 11am – 9pm', 'Sat–Sun · 10am – 9pm'] },
-    { label: 'Find us', lines: ['330 Sunseeker Avenue', 'Innisfil · Lake Simcoe'] },
-    { label: 'Reservations', lines: [PHONE, 'Open to the public'] }
+    { label: 'Hours', icon: Clock, lines: ['Mon–Fri · 11am – 9pm', 'Sat–Sun · 10am – 9pm'] },
+    { label: 'Find us', icon: MapPin, lines: ['330 Sunseeker Avenue', 'Innisfil · Lake Simcoe'] },
+    { label: 'Reservations', icon: CalendarCheck, lines: [PHONE, 'Open to the public'] }
 ];
 
 export default function LcFooter() {
@@ -17,15 +18,15 @@ export default function LcFooter() {
         <footer style={{ background: 'var(--lc-ivory)', color: 'var(--lc-ink)' }}>
             {/* KEEP IN TOUCH */}
             <div className='lc-keep'>
-                <div className='lc-keep-media lc-media lc-frame'>
+                <Reveal variant='image' className='lc-keep-media lc-media lc-frame'>
                     <Image
-                        src='/images/Lakeclub%20(10).jpg'
-                        alt='Guests at The Lake Club'
+                        src='/images/Lakeclub%20(24).jpg'
+                        alt='The dining room at The Lake Club'
                         fill
                         sizes='(max-width: 900px) 100vw, 40vw'
                         style={{ objectFit: 'cover' }}
                     />
-                </div>
+                </Reveal>
                 <div className='lc-keep-body'>
                     <div className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.3em' }}>
                         Newsletter
@@ -45,14 +46,25 @@ export default function LcFooter() {
                 .lc-keep {
                     max-width: 1320px; margin: 0 auto;
                     padding: clamp(56px,7vw,104px) clamp(20px,5vw,72px);
-                    display: grid; grid-template-columns: 0.82fr 1.18fr;
-                    gap: clamp(32px,5vw,80px); align-items: stretch;
+                    display: grid; grid-template-columns: 0.9fr 1.1fr;
+                    gap: clamp(32px,5vw,80px); align-items: center;
                 }
-                .lc-keep-media { position: relative; min-height: clamp(320px, 34vw, 480px); }
+                .lc-keep-media { position: relative; aspect-ratio: 3 / 2; }
+                /* palm-leaf pattern faintly blended behind the brand lockup */
+                .lc-brand { position: relative; overflow: hidden; }
+                .lc-brand::before {
+                    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+                    background-image: url(/backgroundpattern2.jpg);
+                    background-repeat: repeat;
+                    background-size: clamp(300px, 26vw, 420px) auto;
+                    mix-blend-mode: multiply;
+                    opacity: 0.05;
+                }
+                .lc-brand > * { position: relative; z-index: 1; }
                 .lc-keep-body { display: flex; flex-direction: column; justify-content: center; }
                 @media (max-width: 900px){
                     .lc-keep { grid-template-columns: 1fr; }
-                    .lc-keep-media { min-height: 0; aspect-ratio: 16 / 10; }
+                    .lc-keep-media { aspect-ratio: 3 / 2; }
                 }
             `}</style>
 
@@ -66,7 +78,8 @@ export default function LcFooter() {
                                 padding: 'clamp(28px,3.4vw,44px) clamp(20px,4vw,52px)',
                                 borderLeft: i === 0 ? 'none' : '1px solid var(--lc-line)'
                             }}>
-                            <div className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.24em', marginBottom: 14 }}>
+                            <div className='lc-mono' style={{ display: 'flex', alignItems: 'center', gap: 9, color: 'var(--lc-accent)', letterSpacing: '0.24em', marginBottom: 14 }}>
+                                <c.icon size={15} strokeWidth={1.5} />
                                 {c.label}
                             </div>
                             {c.lines.map((l) => (
@@ -80,7 +93,7 @@ export default function LcFooter() {
             </div>
 
             {/* CENTERED BRAND LOCKUP */}
-            <div style={{ padding: 'clamp(64px,8vw,110px) clamp(20px,5vw,72px)', textAlign: 'center' }}>
+            <div className='lc-brand' style={{ padding: 'clamp(64px,8vw,110px) clamp(20px,5vw,72px)', textAlign: 'center' }}>
                 <Image
                     src='/lakeclub_logo.png'
                     alt='Lake Club'

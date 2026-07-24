@@ -129,14 +129,16 @@ export default function LcHome() {
 
             {/* ===================== INTRO — image full-height left, statement right ===================== */}
             <section className='lc-intro'>
-                <Reveal className='lc-media lc-zoom lc-intro-media'>
-                    <Image
-                        src='/images/interior-dining-wide.jpg'
-                        alt='Inside The Lake Club — timber ceiling, long bar, and marina-facing windows'
-                        fill
-                        sizes='(max-width: 900px) 100vw, 48vw'
-                        style={{ objectFit: 'cover', objectPosition: '38% center' }}
-                    />
+                <Reveal variant='image' className='lc-media lc-intro-media'>
+                    <Parallax strength={44} scale={1.16}>
+                        <Image
+                            src='/images/interior-dining-wide.jpg'
+                            alt='Inside The Lake Club — timber ceiling, long bar, and marina-facing windows'
+                            fill
+                            sizes='(max-width: 900px) 100vw, 48vw'
+                            style={{ objectFit: 'cover', objectPosition: '38% center' }}
+                        />
+                    </Parallax>
                 </Reveal>
                 <div className='lc-intro-body'>
                     <Reveal className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.32em', fontSize: 10 }}>
@@ -168,7 +170,7 @@ export default function LcHome() {
             <MenuExplorer />
 
             {/* ===================== GALLERY — auto-loop marquee ===================== */}
-            <section style={{ background: 'var(--lc-cream)', borderTop: '1px solid var(--lc-line)', padding: 'clamp(80px,10vw,150px) 0 0' }}>
+            <section style={{ background: 'var(--lc-cream)', padding: 'clamp(80px,10vw,150px) 0 0' }}>
                 <div style={{ padding: '0 clamp(20px,3vw,48px)', marginBottom: 'clamp(30px,4vw,48px)' }}>
                     <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', gap: 24, flexWrap: 'wrap' }}>
                         <div>

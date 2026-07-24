@@ -447,14 +447,37 @@ body {
 /* Section reveal — relaxed, unhurried (progressive enhancement) */
 .lc-reveal {
   opacity: 0;
-  transform: translateY(38px);
+  transform: translateY(22px);
   transition:
-    opacity 1.3s var(--lc-ease),
-    transform 1.3s var(--lc-ease);
+    opacity 0.9s var(--lc-ease),
+    transform 0.9s var(--lc-ease);
 }
 .lc-reveal.is-in {
   opacity: 1;
   transform: none;
+}
+
+/* fade — opacity only, no travel (for quiet meta lines) */
+.lc-reveal--fade {
+  transform: none;
+}
+
+/* image — a soft wipe-up + settle instead of a block slide (premium) */
+.lc-reveal--image {
+  transform: none;
+  clip-path: inset(6% 0 92% 0);
+  transition:
+    clip-path 1.15s var(--lc-ease),
+    opacity 1.15s var(--lc-ease);
+}
+.lc-reveal--image.is-in {
+  clip-path: inset(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-reveal--image {
+    clip-path: none;
+  }
 }
 
 /* Skip link */

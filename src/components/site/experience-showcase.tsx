@@ -11,11 +11,11 @@ const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
 
 const SHOTS = [
     { n: 1, alt: 'Old fashioned at the bar' },
-    { n: 21, alt: 'Steak frites and sea bass' },
-    { n: 16, alt: 'The dining room' },
-    { n: 9, alt: 'Weekend brunch' },
-    { n: 5, alt: 'Cocktails at golden hour' },
-    { n: 13, alt: 'On the patio' }
+    { n: 8, alt: 'Dinner, plated' },
+    { n: 31, alt: 'The marina-facing dining room' },
+    { n: 36, alt: 'Weekend brunch bowls' },
+    { n: 35, alt: 'Cocktails at golden hour on the patio' },
+    { n: 3, alt: 'A spread on the terrace' }
 ];
 
 const ON_THE_MENU = ['Share Plates', 'Appetizers', 'Handhelds', 'Entrées'];

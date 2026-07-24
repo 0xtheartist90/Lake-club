@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 import { ArrowRight, Clock, Navigation, Users, UtensilsCrossed } from 'lucide-react';
 
+import Parallax from './parallax';
 import Reveal from './reveal';
 
 const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
@@ -24,8 +25,10 @@ export default function PrivateDining() {
         <section id='private-dining' className='lc-pd' aria-label='Private dining'>
             <div className='lc-pd-in'>
                 {/* Left — image with caption */}
-                <Reveal className='lc-media lc-zoom lc-frame lc-pd-photo'>
-                    <Image src={photo(16)} alt='The Lake Club private dining room' fill sizes='(max-width: 940px) 100vw, 44vw' style={{ objectFit: 'cover' }} />
+                <Reveal variant='image' className='lc-media lc-frame lc-pd-photo'>
+                    <Parallax strength={44} scale={1.16}>
+                        <Image src={photo(5)} alt='Guests toasting in the private dining room at The Lake Club' fill sizes='(max-width: 940px) 100vw, 44vw' style={{ objectFit: 'cover' }} />
+                    </Parallax>
                     <div className='lc-pd-photo-scrim' />
                     <div className='lc-pd-photo-cap'>
                         <span className='lc-mono' style={{ fontSize: 9.5, letterSpacing: '0.24em', color: 'var(--lc-accent-on-dark)' }}>
@@ -36,7 +39,7 @@ export default function PrivateDining() {
                 </Reveal>
 
                 {/* Right — copy + compact form */}
-                <div>
+                <div className='lc-pd-body'>
                     <Reveal className='lc-mono' style={{ color: 'var(--lc-accent)', letterSpacing: '0.32em', fontSize: 10 }}>
                         Private dining
                     </Reveal>
@@ -109,11 +112,13 @@ export default function PrivateDining() {
             </div>
 
             <style>{`
-                .lc-pd { background: var(--lc-ivory); border-top: 1px solid var(--lc-line); padding: clamp(56px,7vw,96px) clamp(20px,3vw,48px); }
-                .lc-pd-in { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px,4.5vw,72px); align-items: center; }
-                .lc-pd-photo { position: relative; aspect-ratio: 4 / 3; }
+                .lc-pd { background: var(--lc-ivory); }
+                .lc-pd-in { display: grid; grid-template-columns: 0.92fr 1.08fr; align-items: stretch; min-height: min(88vh, 900px); }
+                .lc-pd-photo { position: relative; align-self: stretch; }
                 .lc-pd-photo-scrim { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(15,24,34,.72)); }
-                .lc-pd-photo-cap { position: absolute; left: 24px; bottom: 20px; z-index: 3; display: flex; flex-direction: column; }
+                .lc-pd-photo-cap { position: absolute; left: clamp(24px,2.5vw,40px); bottom: clamp(22px,2.5vw,36px); z-index: 3; display: flex; flex-direction: column; }
+                .lc-pd-body { display: flex; flex-direction: column; justify-content: center; padding: clamp(48px,5vw,88px) clamp(24px,5vw,84px); }
+                .lc-pd-body .lc-pd-form { max-width: 560px; }
                 .lc-pd-feats { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 20px; padding: 14px 0; border-top: 1px solid var(--lc-line); border-bottom: 1px solid var(--lc-line); }
                 .lc-pd-feat { display: inline-flex; align-items: center; gap: 8px; }
                 .lc-pd-form { display: grid; gap: 14px; margin-top: 24px; }
@@ -126,8 +131,9 @@ export default function PrivateDining() {
                     background-repeat: no-repeat; background-position: right 2px center;
                 }
                 @media (max-width: 940px){
-                    .lc-pd-in { grid-template-columns: 1fr; }
+                    .lc-pd-in { grid-template-columns: 1fr; min-height: 0; }
                     .lc-pd-photo { aspect-ratio: 16 / 10; }
+                    .lc-pd-body { padding: clamp(32px,7vw,48px) clamp(20px,5vw,32px); }
                     .lc-pd-row { grid-template-columns: 1fr; }
                 }
             `}</style>
