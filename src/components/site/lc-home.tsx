@@ -25,7 +25,7 @@ export default function LcHome() {
             <section
                 style={{
                     position: 'relative',
-                    minHeight: 'min(100vh, 1000px)',
+                    minHeight: '100dvh',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',

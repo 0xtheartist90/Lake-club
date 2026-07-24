@@ -24,7 +24,10 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-    title: 'The Lake Club at Friday Harbour Resort | Waterfront Dining, Innisfil',
+    title: {
+        default: 'The Lake Club at Friday Harbour',
+        template: '%s · The Lake Club'
+    },
     description:
         'Marina-facing dining on Lake Simcoe. Brunch, lunch and dinner at The Lake Club at Friday Harbour, Innisfil. Open to the public — reservations welcome.',
     metadataBase: new URL('https://lakeclub.fridayharbour.com')
