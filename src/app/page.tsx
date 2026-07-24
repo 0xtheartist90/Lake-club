@@ -1,12 +1,13 @@
-import HomePage from '@/app/(delete-this-and-modify-page.tsx)/HomePage';
+import LcHome from '@/components/site/lc-home';
+import LcStickyBar from '@/components/site/lc-sticky-bar';
 
-/**
- * The main page component that renders the HomePage component.
- *
- * @returns {JSX.Element} The rendered HomePage component.
- */
 const Page = () => {
-    return <HomePage />;
+    return (
+        <>
+            <LcHome />
+            <LcStickyBar />
+        </>
+    );
 };
 
 export default Page;

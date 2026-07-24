@@ -197,3 +197,290 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ============================================================
+   LAKE CLUB — design system
+   Editorial layout · slate-blue logo accent (#425969)
+   ============================================================ */
+
+:root {
+  /* Palette */
+  --lc-ink: #1e2a33; /* deep navy text */
+  --lc-ink-soft: rgba(30, 42, 51, 0.66);
+  --lc-ink-faint: rgba(30, 42, 51, 0.42);
+
+  --lc-accent: #425969; /* logo slate blue */
+  --lc-accent-deep: #34454f;
+  --lc-accent-soft: #6f8797;
+  --lc-accent-tint: #dbe3e8;
+  --lc-accent-on-dark: #9db4c2;
+
+  /* Page base — muted tint of the logo slate (reference-style accent background) */
+  --lc-cream: #c9d4da;
+  --lc-ivory: #d4dee3;
+  --lc-sand: #bac8d0; /* deeper slate panel */
+  --lc-dark: #14202a; /* dark sections / footer */
+  --lc-dark-2: #0e1822;
+
+  --lc-line: rgba(30, 42, 51, 0.14);
+  --lc-line-warm: rgba(30, 42, 51, 0.1);
+
+  --lc-bar-h: 28px;
+  --lc-nav-h: 62px;
+  --lc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Fonts — next/font defines --font-fraunces/--font-inter via a class on <body>,
+   so the aliases must be declared on body (var() resolves at the declaring element). */
+body {
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+}
+
+@theme inline {
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+
+  --color-lc-ink: var(--lc-ink);
+  --color-lc-accent: var(--lc-accent);
+  --color-lc-accent-deep: var(--lc-accent-deep);
+  --color-lc-accent-soft: var(--lc-accent-soft);
+  --color-lc-cream: var(--lc-cream);
+  --color-lc-ivory: var(--lc-ivory);
+  --color-lc-sand: var(--lc-sand);
+  --color-lc-dark: var(--lc-dark);
+}
+
+/* Type helpers — serif display at regular weight (reference style) */
+.lc-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.015em;
+  line-height: 1.02;
+}
+.lc-italic {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.lc-mono {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  font-size: 11px;
+}
+.lc-body {
+  font-family: var(--font-body);
+}
+
+/* Buttons — sharp, editorial, zero radius */
+.lc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 30px;
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    color 0.4s var(--lc-ease),
+    border-color 0.4s var(--lc-ease),
+    background 0.4s var(--lc-ease);
+}
+.lc-btn svg {
+  transition: transform 0.4s var(--lc-ease);
+}
+.lc-btn:hover svg {
+  transform: translateX(5px);
+}
+/* fill-sweep on hover */
+.lc-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s var(--lc-ease);
+}
+.lc-btn:hover::before {
+  transform: scaleY(1);
+}
+.lc-btn--primary {
+  background: var(--lc-accent);
+  color: #fff;
+}
+.lc-btn--primary::before {
+  background: var(--lc-ink);
+}
+.lc-btn--primary:hover {
+  color: #fff;
+}
+.lc-btn--dark {
+  background: var(--lc-ink);
+  color: #fff;
+}
+.lc-btn--dark::before {
+  background: var(--lc-accent);
+}
+.lc-btn--ghost {
+  background: transparent;
+  color: var(--lc-ink);
+  border-color: var(--lc-ink);
+}
+.lc-btn--ghost::before {
+  background: var(--lc-ink);
+}
+.lc-btn--ghost:hover {
+  color: #fff;
+}
+.lc-btn--light {
+  background: #fff;
+  color: var(--lc-ink);
+}
+.lc-btn--light::before {
+  background: var(--lc-accent);
+}
+.lc-btn--light:hover {
+  color: #fff;
+}
+.lc-btn--ghost-light {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+}
+.lc-btn--ghost-light::before {
+  background: #fff;
+}
+.lc-btn--ghost-light:hover {
+  color: var(--lc-ink);
+  border-color: #fff;
+}
+
+/* Newsletter / form — sharp hairline inputs */
+.lc-field {
+  width: 100%;
+  height: 52px;
+  padding: 0 2px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--lc-line);
+  border-radius: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--lc-ink);
+  letter-spacing: 0.01em;
+  transition: border-color 0.3s var(--lc-ease);
+}
+.lc-field::placeholder {
+  color: var(--lc-ink-faint);
+}
+.lc-field:focus {
+  outline: none;
+  border-color: var(--lc-accent);
+}
+
+/* Full-bleed helper: break out of any max-width container */
+.lc-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Inset hairline frame over imagery — quiet luxury detail */
+.lc-frame::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Animated nav underline */
+.lc-nav-link {
+  position: relative;
+  transition: color 0.2s var(--lc-ease);
+}
+.lc-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 1.5px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s var(--lc-ease);
+}
+.lc-nav-link:hover::after,
+.lc-nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* Image hover lift */
+.lc-media {
+  overflow: hidden;
+  position: relative;
+}
+.lc-media img {
+  transition: transform 0.8s var(--lc-ease);
+}
+.lc-zoom:hover img {
+  transform: scale(1.06);
+}
+
+/* Section reveal (progressive enhancement; visible by default) */
+.lc-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.8s var(--lc-ease),
+    transform 0.8s var(--lc-ease);
+}
+.lc-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Skip link */
+.lc-skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 200;
+  background: var(--lc-ink);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 0;
+}
+.lc-skip-link:focus {
+  left: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .lc-media img,
+  .lc-btn,
+  .lc-btn svg {
+    transition: none;
+  }
+}
