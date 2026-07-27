@@ -46,7 +46,7 @@ const CATEGORIES: Category[] = [
     },
     {
         key: 'dinner',
-        img: 16,
+        img: 33,
         label: 'Dinner',
         icon: 'cloche',
         meta: 'Nightly · 5pm – 9pm',
@@ -220,7 +220,12 @@ export default function MenuExplorer() {
                                 aria-hidden='true'
                                 fill
                                 sizes='(max-width: 900px) 100vw, 50vw'
-                                style={{ objectFit: 'cover', opacity: i === active ? 1 : 0, transition: 'opacity 1s var(--lc-ease)' }}
+                                style={{
+                                    objectFit: 'cover',
+                                    objectPosition: c.key === 'dinner' ? 'center bottom' : 'center',
+                                    opacity: i === active ? 1 : 0,
+                                    transition: 'opacity 1s var(--lc-ease)'
+                                }}
                             />
                         ))}
                     </Parallax>

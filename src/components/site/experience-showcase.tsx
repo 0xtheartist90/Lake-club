@@ -7,15 +7,15 @@ import Image from 'next/image';
 import Parallax from './parallax';
 import Reveal from './reveal';
 
-const photo = (n: number) => `/images/Lakeclub%20(${n}).jpg`;
+const photo = (s: { n: number; src?: string }) => s.src ?? `/images/Lakeclub%20(${s.n}).jpg`;
 
 const SHOTS = [
-    { n: 1, alt: 'Old fashioned at the bar' },
+    { n: 14, alt: 'Signature cocktail and dessert' },
     { n: 8, alt: 'Dinner, plated' },
     { n: 31, alt: 'The marina-facing dining room' },
-    { n: 36, alt: 'Weekend brunch bowls' },
+    { n: 36, src: '/images/Lakeclub.png', alt: 'Roasted squash with grains and beet purée' },
     { n: 35, alt: 'Cocktails at golden hour on the patio' },
-    { n: 3, alt: 'A spread on the terrace' }
+    { n: 19, alt: 'The marina at dusk from above' }
 ];
 
 const ON_THE_MENU = ['Share Plates', 'Appetizers', 'Handhelds', 'Entrées'];
@@ -27,11 +27,11 @@ export default function ExperienceShowcase() {
         <section className='lc-exp'>
             {/* Main image — bleeds to the right edge, crossfades on thumbnail select */}
             <div className='lc-exp-media'>
-                <Parallax strength={60} scale={1.16}>
+                <Parallax strength={34} scale={1.08}>
                     {SHOTS.map((s, i) => (
                         <Image
                             key={s.n}
-                            src={photo(s.n)}
+                            src={photo(s)}
                             alt={i === active ? s.alt : ''}
                             aria-hidden={i !== active}
                             fill
@@ -86,7 +86,7 @@ export default function ExperienceShowcase() {
                                     aria-label={s.alt}
                                     onClick={() => setActive(i)}
                                     className={`lc-exp-thumb ${i === active ? 'is-active' : ''}`}>
-                                    <Image src={photo(s.n)} alt='' fill sizes='110px' style={{ objectFit: 'cover' }} />
+                                    <Image src={photo(s)} alt='' fill sizes='110px' style={{ objectFit: 'cover' }} />
                                 </button>
                             ))}
                         </div>

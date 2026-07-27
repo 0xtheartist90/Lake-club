@@ -51,14 +51,16 @@ export default function LcHome() {
                 />
                 <div style={{ position: 'relative', zIndex: 2, padding: '0 clamp(20px,4vw,64px) clamp(28px,4.5vh,52px)', width: '100%' }}>
                     <Reveal>
-                        <Image
-                            src='/lakeclub_logo.png'
-                            alt=''
-                            width={277}
-                            height={360}
-                            priority
-                            style={{ height: 'clamp(52px, 6.5vw, 88px)', width: 'auto', filter: 'brightness(0) invert(1)' }}
-                        />
+                        <h1 style={{ margin: 0, lineHeight: 0 }}>
+                            <Image
+                                src='/lakeclub_logo.png'
+                                alt='The Lake Club at Friday Harbour'
+                                width={277}
+                                height={360}
+                                priority
+                                style={{ height: 'clamp(150px, 24vw, 320px)', width: 'auto', filter: 'brightness(0) invert(1)' }}
+                            />
+                        </h1>
                     </Reveal>
                     <Reveal delay={70} className='lc-mono' style={{ color: 'rgba(255,255,255,.8)', letterSpacing: '0.36em', display: 'flex', flexWrap: 'wrap', gap: '8px 18px', fontSize: 10, marginTop: 26 }}>
                         <span>Waterfront Dining</span>
@@ -67,21 +69,7 @@ export default function LcHome() {
                         <span style={{ opacity: 0.45 }}>—</span>
                         <span>Friday Harbour</span>
                     </Reveal>
-                    <Reveal delay={120}>
-                        <h1
-                            style={{
-                                fontFamily: 'var(--font-body)',
-                                fontWeight: 700,
-                                fontSize: 'clamp(56px, 14vw, 230px)',
-                                lineHeight: 0.88,
-                                margin: '12px 0 0',
-                                color: '#fff',
-                                letterSpacing: '-0.035em'
-                            }}>
-                            LAKE&nbsp;CLUB
-                        </h1>
-                    </Reveal>
-                    <Reveal delay={180} style={{ maxWidth: 480, marginTop: 20 }}>
+                    <Reveal delay={180} style={{ maxWidth: 480, marginTop: 24 }}>
                         <p className='lc-body' style={{ fontSize: 16, lineHeight: 1.65, color: 'rgba(255,255,255,.88)', margin: 0 }}>
                             A marina-facing kitchen where brunch runs to dinner and every table looks out over the water.
                         </p>
